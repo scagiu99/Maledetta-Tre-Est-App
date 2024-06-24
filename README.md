@@ -9,6 +9,18 @@ The purpose of the system is to allow passengers to share information on the sta
 The aim of this project is to create an android app and its respective cross platform app (using the cordova plugin). 
 In this repository you can find the src of the Android application and the www of Cordova where there is the code to run the platform.
 
+### SYSTEM DATA
+
+• Line: TreEst manages various railway **lines**. Each line is made up of a list of stations (station) each with a name (sname) and geographical coordinates (lat and lon). The first and last stations (the two terminus) define the name of the line. E.g.: a line that has stations [“Abbiategrasso”, “Baggio”, “Como”, “Domodossola”] is the “Abbiategrasso-Domodossola” line. For each line there are two **sections** (direction) identified by an id (did). In the previous example, for the “Abbiategrasso-Domodossola” line there are the sections “Abbiategrasso-Domodossola towards Abbiategrasso” and “Abbiategrasso-Domodossola towards Domodossola”. Note: Some stations may be part of multiple lines.
+
+• **User (user):** is identified by a name (uname) and contains an optional profile image (upicture), which must be encoded in Base64 and the version number of the profile image (pversion) which at the beginning ( when the user does not yet have an image) is equal to zero. Each user has two other identifiers: a session number (sid) which is known only to the user's application and serves as login credentials, and a user identifier (uid) which is known to other users.
+
+• A **post** **board** is defined for each section of each line. Each post is identified by a numeric **identifier** (pid), is created by a user (author, the uid of the user who created the post), and contains **delay** information (delay, 0: on time, 1: delayed by a few minutes, 2: delay more than 15 minutes, 3: trains cancelled) and travel **status** (status, 0: ideal situation, 1: acceptable, 2: serious problems for passengers) and a **comment**. The three pieces of information (delay, status and comment) are all optional, but at least one of these must be reported (otherwise we would have an empty post).
+
+• A “**follow**” relationship is defined between users: the relationship is asymmetric (user A can follow user B without B following A) and A can start following B without B providing his authorization.
+
+### SYSTEM DESCRIPTION
+
 The functionalities are the following:
 
 • **Implicit registration:** Each user has a session number that identifies him to the server. When started for the first time, the application requests a session number from the server and then stores it in persistent mode. In all communications between client and server, the client indicates its session number. The user never enters their session number by hand (the user doesn't even know what a session number is) nor does they ever take an explicit logging action. The user knows nothing about login or registration, the app does everything without asking the user anything.
