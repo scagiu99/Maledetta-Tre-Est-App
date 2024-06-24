@@ -160,21 +160,4 @@ class CommunicationController {
       error: (error) => errorCallback(error),
     });
   }
-
-  /******************************** ESAME GENNAIO ***********************************/
-
-  getOfficialPost(did, responseCallback, errorCallback) {
-    let service_url = "statolineatreest.php";
-    let url = this._BASE_URL + service_url;
-    let data = { did: did };
-
-    $.post({
-      url: url,
-      contentType: "text/plain",
-      data: JSON.stringify(data),
-      dataType: "json",
-      success: (response) => responseCallback(response),
-      error: (error) => errorCallback(error),
-    });
-  }
 }

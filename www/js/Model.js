@@ -132,7 +132,6 @@ class Model {
   constructor() {
     this._lines = [];
     this._posts = [];
-    this._officialPosts = [];
     this._stations = [];
     this._users = new Map();
     this._posizione = "";
@@ -379,45 +378,5 @@ class Model {
     this.db.executeSql(query, [uid, pversion], selectSuccess, function () {
       console.error("select non avvenuta");
     });
-  }
-
-  /* -------------------------------------- ESAME GENNAIO -------------------------------------- */
-
-  getPositionOfficialPost(position) {
-    console.log("PositionOfficial " + this._officialPosts[position]);
-    return this._officialPosts[position];
-  }
-
-  getSizeOfficialPosts() {
-    return this._officialPosts.length;
-  }
-
-  createOfficialPostObject(officialPost) {
-    return new Post(
-      null,
-      officialPost.description,
-      null,
-      null,
-      officialPost.title,
-      null,
-      null,
-      officialPost.timestamp
-    );
-  }
-
-  addOfficialPost(officialPost) {
-    console.log(
-      "esamegennaio " +
-        "title: [" +
-        officialPost.authorName +
-        "] timestamp: [" +
-        officialPost.datetime +
-        "]"
-    );
-    this._officialPosts.push(officialPost);
-  }
-
-  clearOfficialPosts() {
-    this._officialPosts = [];
   }
 }

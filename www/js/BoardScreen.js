@@ -11,7 +11,6 @@ function onCreateBoardScreen(did, direction) {
   }
   getDetailStations(did);
   getDetailsPosts(did);
-  getDetailsOfficialPosts(did);
   currentlyLocation();
 }
 
@@ -364,69 +363,4 @@ function changeDirection() {
   localStorage.setItem("oppositeDirection", oppositeDirection);
 
   onCreateBoardScreen(did, direction);
-}
-
-/*************************************** ESAME GENNAIO ************************************/
-
-function getDetailsOfficialPosts(did) {
-  $("#officialPost").empty();
-  model.clearOfficialPosts();
-
-  communicationController.getOfficialPost(
-    did,
-    (response) => {
-      console.log(response.officialposts);
-      officialPostResponse(response, did);
-    },
-    (error) => {
-      showShortToast("Errore nel caricamento");
-      console.error(error);
-    }
-  );
-}
-
-function officialPostResponse(networkResponse, did) {
-  let arrOfficialPosts = networkResponse.officialposts;
-  console.log("JSON" + arrOfficialPosts);
-
-  for (let officialPost of arrOfficialPosts) {
-    console.log("JSON" + arrOfficialPosts);
-    //Aggiungo il post al model
-    let nuovoPost = model.createOfficialPostObject(officialPost);
-    model.addOfficialPost(nuovoPost);
-
-    $("#officialPost").append(generateOfficialPostView(nuovoPost));
-    eventPostFollow(officialPost);
-
-    //Creo la funzione di click sulla riga
-    $(".official").click(eventOfficialPost);
-  }
-  console.log(
-    "esamegennaio " +
-      "did: [" +
-      did +
-      "] numero di post ufficiali: [" +
-      model.getSizeOfficialPosts() +
-      "]"
-  );
-}
-
-function generateOfficialPostView(officialPost) {
-  return (
-    '<li class="official list-group-item post">' +
-    '<div class="container" style="background-color:#29D8C8"><p class="profilePostName"><b>' +
-    officialPost.authorName +
-    '</b></p><img class="profilePostImage rounded-circle" src="./img/polizia.jpeg">' +
-    '<p class="text-break postText">' +
-    officialPost.comment +
-    '</p> <span class="time-right">' +
-    officialPost.datetime +
-    "</span></div></li>"
-  );
-}
-
-function eventOfficialPost() {
-  let i = $(this).index();
-  let officialPost = model.getPositionOfficialPost(i);
-  onCreateDetailOfficialPostScreen(officialPost);
 }

@@ -24,7 +24,6 @@ function inizializeEvent() {
   //addPostButton
   $("#backButtonPost").on("click", onCreateBoardScreen);
   $("#backButtonMap").on("click", onCreateBoardScreen);
-  $("#backButtonOfficial").on("click", onCreateBoardScreen);
   $("#aggiungiPostButton").on("click", addNewPost);
   //Profile button
   $("#changeImage").on("click", onClickChangeImage);
