@@ -20,21 +20,17 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.Maledetta_TreEst.CommunicationController;
 import com.example.Maledetta_TreEst.Model;
-import com.example.Maledetta_TreEst.OnRecyclerViewClickListener;
 import com.example.Maledetta_TreEst.R;
 import com.example.Maledetta_TreEst.Utils;
 import com.example.Maledetta_TreEst.line.LineActivity;
 import com.example.Maledetta_TreEst.post.AddPostActivity;
 import com.example.Maledetta_TreEst.post.Author;
-import com.example.Maledetta_TreEst.post.DetailOfficialPostActivity;
-import com.example.Maledetta_TreEst.post.OfficialPost;
 import com.example.Maledetta_TreEst.post.Post;
 import com.example.Maledetta_TreEst.user.ProfileActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -59,12 +55,10 @@ import com.google.gson.Gson;
 
 import java.util.Objects;
 
-public class BoardActivity extends AppCompatActivity implements  OnMapReadyCallback, OnRecyclerViewClickListener {
+public class BoardActivity extends AppCompatActivity implements  OnMapReadyCallback {
     private BoardAdapter boardAdapter;
-    private OfficialBoardAdapter officialBoardAdapter;
     private TextView line;
     private RecyclerView recyclerView;
-    private RecyclerView recyclerViewOfficial;
     private CommunicationController communicationController;
     private GoogleMap mMap;
     private Model model;
@@ -112,16 +106,6 @@ public class BoardActivity extends AppCompatActivity implements  OnMapReadyCallb
             boardAdapter = new BoardAdapter(this);
             recyclerView.setAdapter(boardAdapter);
 
-        /* ----------------------------------- ESAME GENNAIO --------------------------------------- */
-
-            recyclerViewOfficial = findViewById(R.id.recyclerViewOfficial);
-            recyclerViewOfficial.setLayoutManager(new LinearLayoutManager(this));
-
-            officialBoardAdapter = new OfficialBoardAdapter(this, this);
-            recyclerViewOfficial.setAdapter(officialBoardAdapter);
-
-            /* -------------------------------------------------------------------------- */
-
             fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
             //callback per gli aggiornamenti di posizione
             locationCallback = new LocationCallback() {
@@ -150,7 +134,6 @@ public class BoardActivity extends AppCompatActivity implements  OnMapReadyCallb
                 ;
             };
 
-            getOfficialPost(tratta);
             getDetailsPosts(tratta);
 
             //Fragment della Mappa
@@ -181,36 +164,6 @@ public class BoardActivity extends AppCompatActivity implements  OnMapReadyCallb
             });
 
     }
-    /*------------------------------------------ ESAME GENNAIO ---------------------------------------------*/
-
-    public void getOfficialPost(String tratta) {
-        Log.d("getOfficialPost", "OfficialPost");
-
-        model.clearOfficialPosts();
-        communicationController.statoLineaTreEst(
-                tratta,
-                response -> {
-                    model.officialPostResponse(response);
-                    Log.d("esamegennaio", "did: [" + tratta + "] numero di post ufficiali: ["+ model.getSizeOfficialPosts()+ "]");
-                    OfficialPost avviso;
-                    officialBoardAdapter.notifyDataSetChanged();
-                }, error -> {
-                    Log.e("Error", error.getLocalizedMessage());
-                    Toast.makeText(BoardActivity.this, "Errore di caricamento", Toast.LENGTH_SHORT).show();
-                }
-        );
-    }
-
-    @Override
-    public void onRecyclerViewClick(View v, int position) {
-        Log.d("ListaOfficialPost", "Click sul post " + position);
-        Intent intent = new Intent(this, DetailOfficialPostActivity.class);
-        intent.putExtra("Title", Model.getInstance().getPositionOfficialPost(position).getTitle());
-        intent.putExtra("Description", Model.getInstance().getPositionOfficialPost(position).getDescription());
-        intent.putExtra("Timestamp", Model.getInstance().getPositionOfficialPost(position).getTimestamp());
-        intent.putExtra("TrattaSelezionata", tratta);
-        startActivity(intent);
-    }
 
     /*------------------------------------------ POST ---------------------------------------------*/
 
@@ -222,7 +175,7 @@ public class BoardActivity extends AppCompatActivity implements  OnMapReadyCallb
                 model.getSid(),
                 tratta,
                 response -> {
-                   model.postResponse(response);
+                    model.postResponse(response);
                     Log.d("Response", "Model size posts: " + model.getSizePosts());
 
                     //Effettuo la chiamata per ottenere le informazioni degli autori dei post

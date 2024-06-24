@@ -17,7 +17,6 @@ import com.example.Maledetta_TreEst.Model;
 import com.example.Maledetta_TreEst.OnRecyclerViewClickListener;
 import com.example.Maledetta_TreEst.R;
 import com.example.Maledetta_TreEst.Utils;
-import com.example.Maledetta_TreEst.post.OfficialPost;
 import com.example.Maledetta_TreEst.post.Post;
 
 public class BoardAdapter extends RecyclerView.Adapter<BoardViewHolder> {
@@ -42,14 +41,13 @@ public class BoardAdapter extends RecyclerView.Adapter<BoardViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull BoardViewHolder holder, int position) {
         Post post = Model.getInstance().getPositionPost(position);
-
         Bitmap profileImage = null;
         String profileImageBase64 = Model.getInstance().getAuthorsPicture(position);
 
         if (profileImageBase64 != null) {
             profileImage = Utils.convertBase64ToBitmap(profileImageBase64);
         }
-        holder.updateContent( post, profileImage);
+        holder.updateContent(post, profileImage);
 
         holder.follow.setOnClickListener(v -> {
             Log.d("FollowClick", String.valueOf(holder.follow.isChecked()));

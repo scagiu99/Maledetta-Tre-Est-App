@@ -229,25 +229,4 @@ public class CommunicationController {
         );
         queue.add(request);
     }
-
-    public void statoLineaTreEst(String did, Response.Listener<JSONObject> responseListener, Response.ErrorListener errorListener ) {
-        String url = BASE_URL + "statolineatreest.php";
-        Log.d("CommunicationController", "statoLineaTreEst");
-
-        JSONObject requestParam = new JSONObject();
-        try {
-            requestParam.put("did", did);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
-                url,
-                requestParam,
-                responseListener,
-                errorListener
-        );
-        queue.add(request);
-    }
 }

@@ -20,7 +20,6 @@ import com.example.Maledetta_TreEst.Model;
 import com.example.Maledetta_TreEst.OnRecyclerViewClickListener;
 import com.example.Maledetta_TreEst.R;
 import com.example.Maledetta_TreEst.Utils;
-import com.example.Maledetta_TreEst.post.OfficialPost;
 import com.example.Maledetta_TreEst.post.Post;
 
 public class BoardViewHolder extends RecyclerView.ViewHolder {
@@ -31,7 +30,7 @@ public class BoardViewHolder extends RecyclerView.ViewHolder {
     protected final ToggleButton follow;
 
 
-    public BoardViewHolder( @NonNull View itemView) {
+    public BoardViewHolder(@NonNull View itemView) {
         super(itemView);
 
         nPost = itemView.findViewById(R.id.post);

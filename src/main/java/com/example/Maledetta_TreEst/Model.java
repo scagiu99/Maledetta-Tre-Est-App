@@ -11,7 +11,6 @@ import androidx.room.Room;
 import com.example.Maledetta_TreEst.line.Line;
 import com.example.Maledetta_TreEst.pictures.UserDB;
 import com.example.Maledetta_TreEst.post.Author;
-import com.example.Maledetta_TreEst.post.OfficialPost;
 import com.example.Maledetta_TreEst.post.Post;
 import com.example.Maledetta_TreEst.station.Station;
 
@@ -29,7 +28,6 @@ public class Model {
 
     private final List<Line> lines;
     private final List<Post> posts;
-    private final List<OfficialPost> officialPosts;
     private final List<Station> stations;
     private Station posizione;
     private final List<Author> users;
@@ -43,7 +41,6 @@ public class Model {
         posts = new ArrayList<>();
         stations = new ArrayList<>();
         users = new ArrayList<>();
-        officialPosts = new ArrayList<>();
     }
 
     public static synchronized Model getInstance() {
@@ -316,39 +313,6 @@ public class Model {
 
     }
 
-    /* --------------------------------------------- ESAME GENNAIO ------------------------------------------ */
-
-    public OfficialPost getPositionOfficialPost(int position) {
-        return officialPosts.get(position);
-    }
-
-    public Integer getSizeOfficialPosts() {
-        return officialPosts.size();
-    }
-
-    public void officialPostResponse(JSONObject networkResponse) {
-        try {
-            JSONArray arrOfficialPost = networkResponse.getJSONArray("officialposts");
-            Log.d("JSON", arrOfficialPost.toString());
-
-            for (int i = 0; i < arrOfficialPost.length(); i++) {
-                Log.d("esamegennaio ", "title: [" + arrOfficialPost.getJSONObject(i).getString("title") +
-                        "] timestamp: [" + arrOfficialPost.getJSONObject(i).getString("timestamp") + "]");
-                OfficialPost officialPost = new OfficialPost(arrOfficialPost.getJSONObject(i).getString("title"),
-                        arrOfficialPost.getJSONObject(i).getString("timestamp"),
-                        arrOfficialPost.getJSONObject(i).getString("description"));
-                officialPosts.add(officialPost);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Log.e("Error", "JSON sid Error");
-        }
-    }
-
-
-    public void clearOfficialPosts() {
-        officialPosts.clear();
-    }
 
 }
 
