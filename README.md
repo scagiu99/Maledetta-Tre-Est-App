@@ -1,4 +1,4 @@
-# Maledetta-Tre-Est-App
+# Maledetta Tre Est App - project of Mobile Computing
 Project for the University Bachelor Degree Course of Mobile Computing (A.A. 2020-2021)
 
 TreEst is a railway transport company. Unfortunately, TreEst trains are often late, crowded or even cancelled. 
