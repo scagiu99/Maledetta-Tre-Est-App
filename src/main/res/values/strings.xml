@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Maledetta_TreEst</string>
+    <string name="segui">Segui</string>
+    <string name="follow">Follow</string>
+    <string name="non_seguire">Non seguire</string>
+    <string name="nuovo_post">Nuovo Post</string>
+    <string name="Bacheca">Bacheca</string>
+    <string name="Linee">Linee</string>
+    <string name="Profilo">Profilo</string>
+    <string name="fab_content_desc" />
+    <string name="inserisci_commento">Inserisci commento...</string>
+    <string name="in_orario">In orario</string>
+    <string name="ritardo_di_pochi_minuti">Ritardo di pochi minuti</string>
+    <string name="ritardo_oltre_i_15_minuti">Ritardo oltre i 15 minuti</string>
+    <string name="treni_soppressi">Treni soppressi</string>
+    <string name="situazione_ideale">Situazione ideale</string>
+    <string name="accettabile">Accettabile</string>
+    <string name="gravi_problemi_per_i_passeggeri">Gravi problemi per i passeggeri</string>
+    <string name="stato_del_viaggio">Stato del viaggio</string>
+    <string name="ritardo">Ritardo</string>
+    <string name="indietro">Indietro</string>
+    <string name="aggiungi">Aggiungi</string>
+    <string name="aggiungi_nuovo_post">Aggiungi nuovo post</string>
+    <string name="inserisci_nome">Inserisci Nome</string>
+    <string name="linee_ferroviarie">Linee Ferroviarie</string>
+</resources>

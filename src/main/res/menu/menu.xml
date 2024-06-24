@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:id="@+id/bacheca"
+            android:enabled="true"
+            android:title="@string/Bacheca"
+            android:icon="@drawable/home"
+            android:iconTint="@color/black" />
+        <item
+            android:id="@+id/linee"
+            android:enabled="true"
+            android:title="@string/Linee"
+            android:icon="@drawable/train"
+            android:iconTint="@color/black" />
+        <item
+            android:id="@+id/profilo"
+            android:enabled="true"
+            android:iconTint="@color/black"
+            android:icon="@drawable/profile"
+            android:title="@string/Profilo" />
+
+</menu>
